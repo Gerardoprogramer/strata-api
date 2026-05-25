@@ -1,9 +1,10 @@
 [project]
 name = "strata-api"
 version = "0.1.0"
-description = "Add your description here"
+description = "Strata backend API"
 readme = "README.md"
 requires-python = ">=3.11"
+
 dependencies = [
     "alembic>=1.18.4",
     "fastapi>=0.136.1",
@@ -12,7 +13,7 @@ dependencies = [
     "pydantic-settings>=2.14.1",
     "python-jose[cryptography]>=3.5.0",
     "sqlalchemy>=2.0.49",
-    "uvicorn>=0.47.0",
+    "uvicorn[standard]>=0.47.0",
 ]
 
 [dependency-groups]
@@ -27,3 +28,15 @@ dev = [
 [tool.pytest.ini_options]
 pythonpath = ["."]
 asyncio_mode = "auto"
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = false
+ignore_missing_imports = true
