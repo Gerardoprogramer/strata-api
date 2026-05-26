@@ -20,7 +20,6 @@ class Settings(BaseSettings):
     JWT_SECRET: str
 
     @computed_field
-    @property
     def DATABASE_URL(self) -> str:
         # Esto convierte caracteres como @ en %40, evitando que rompan la URI
         safe_password = quote_plus(self.DB_PASSWORD)
