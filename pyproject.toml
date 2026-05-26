@@ -40,3 +40,5 @@ select = ["E", "F", "I"]
 python_version = "3.11"
 strict = false
 ignore_missing_imports = true
+namespace_packages = true
+explicit_package_bases = true
