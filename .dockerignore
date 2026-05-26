@@ -1,4 +1,5 @@
 venv
+.venv
 __pycache__
 *.pyc
 .git
@@ -8,3 +9,4 @@ __pycache__
 .ruff_cache
 .idea
 .vscode
+.gitignore
