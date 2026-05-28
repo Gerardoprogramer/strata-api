@@ -1,7 +1,7 @@
 from functools import lru_cache
-from urllib.parse import quote_plus  # <--- IMPORTA ESTO
+from urllib.parse import quote_plus
 
-from pydantic import computed_field
+from pydantic import SecretStr, computed_field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -17,17 +17,18 @@ class Settings(BaseSettings):
     DB_HOST: str = "localhost"
     DB_PORT: int = 5432
 
-    JWT_SECRET: str
+    JWT_SECRET: SecretStr
+    JWT_ALGORITHM: str = "HS256"
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
 
     @computed_field  # type: ignore[prop-decorator]
     @property
     def DATABASE_URL(self) -> str:
-        # Esto convierte caracteres como @ en %40, evitando que rompan la URI
         safe_password = quote_plus(self.DB_PASSWORD)
 
         return (
             f"postgresql+psycopg://"
-            f"{self.DB_USER}:{safe_password}"  # <--- USA LA CONTRASEÑA ESCAPEADA
+            f"{self.DB_USER}:{safe_password}"
             f"@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
         )
 
